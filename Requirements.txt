@@ -1,8 +1,8 @@
 
-# Creazione ambiente virtuale
+# virtual environment
 python -m venv .venv
 
-# Attivazione ambiente virtuale
+# Activation envirounment
 # Windows (PowerShell):
 .venv\Scripts\Activate.ps1
 # Windows (CMD):
@@ -10,5 +10,5 @@ python -m venv .venv
 # Linux/Mac:
 source .venv/bin/activate
 
-# Installazione librerie necessarie
+# Installation library
 pip install pygame
