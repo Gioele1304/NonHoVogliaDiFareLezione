@@ -23,10 +23,15 @@ snake_speed = 15
 
 clock = pygame.time.Clock()
 font_style = pygame.font.SysFont("bahnschrift", 25)
+score_font = pygame.font.SysFont("comicsansms", 35)
 
 def message(msg, color):
     mesg = font_style.render(msg, True, color)
     window.blit(mesg, [width / 6, height / 3])
+
+def Your_score(score):
+    value = score_font.render("Score: " + str(score), True, white)
+    window.blit(value, [10, 10])   # posizione in alto a sinistra
 
 def gameLoop():
     game_over = False
@@ -44,11 +49,14 @@ def gameLoop():
     foodx = round(random.randrange(0, width - snake_block) / 10.0) * 10.0
     foody = round(random.randrange(0, height - snake_block) / 10.0) * 10.0
 
+    score = 0   # 🔥 variabile punteggio
+
     while not game_over:
 
         while game_close:
             window.fill(black)
             message("Hai perso! Premi Q per uscire o C per riprovare", red)
+            Your_score(score)   # mostra punteggio anche nel game over
             pygame.display.update()
 
             for event in pygame.event.get():
@@ -94,12 +102,14 @@ def gameLoop():
         for x in snake_List:
             pygame.draw.rect(window, white, [x[0], x[1], snake_block, snake_block])
 
+        Your_score(score)   # 🔥 mostra punteggio durante il gioco
         pygame.display.update()
 
         if x1 == foodx and y1 == foody:
             foodx = round(random.randrange(0, width - snake_block) / 10.0) * 10.0
             foody = round(random.randrange(0, height - snake_block) / 10.0) * 10.0
             Length_of_snake += 1
+            score += 10   # 🔥 aumenta punteggio
 
         clock.tick(snake_speed)
 
